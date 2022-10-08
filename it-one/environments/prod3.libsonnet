@@ -5,8 +5,8 @@ local prod = import './prod.libsonnet';
 prod {
   components +: {
     ingress +: {
-      values: {
-        controller: {
+      values +: {
+        controller +: {
           nginxDebug: true
         }
       }
