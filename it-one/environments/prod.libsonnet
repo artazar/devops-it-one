@@ -4,8 +4,12 @@ local base = import './base.libsonnet';
 
 base {
   components +: {
-    nginx-ingress +: {
-      replicas: 2,
+    ingress +: {
+      values: {
+        controller: {
+          replicaCount: 3
+        }
+      }
     },
   }
 }
