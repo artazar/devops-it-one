@@ -10,6 +10,12 @@ spec:
     prod:
       defaultNamespace: default
       context: prod
+    prod2:
+      defaultNamespace: default
+      context: prod
+    prod3:
+      defaultNamespace: default
+      context: prod
   vars:
     computed:
       - name: helmTemplate
@@ -18,7 +24,7 @@ spec:
             local p = import './params.libsonnet',
             local values = p.components['ingress'].values,
             command: 'helm',
-            args: [ 'template', '../helm-chart', '-f-' ],
+            args: [ 'template', ('ingress-' + std.extVar('qbec.io/env')), '../helm-chart', '-f-' ],
             stdin: std.manifestJson(values)
           }
   dataSources:
