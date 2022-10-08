@@ -1,0 +1,25 @@
+apiVersion: qbec.io/v1alpha1
+kind: App
+metadata:
+  name: it-one
+spec:
+  environments:
+    stage:
+      defaultNamespace: default
+      context: stage
+    prod:
+      defaultNamespace: default
+      context: prod
+  vars:
+    computed:
+      - name: helmTemplate
+        code: |
+          {
+            command: './script.sh',
+            # args: [ std.native('renderYaml')({ rbac: { create: 'false' }}) ],
+          }
+  dataSources:
+    # data sources are declared to be of the form
+    #   <kind>://<name>?configVar=<configuration-variable-name>
+    # in this case kind=exec, name=helm, and config var is helmTemplate defined above
+    - exec://helm?configVar=helmTemplate
