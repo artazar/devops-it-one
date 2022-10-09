@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -x
-
 DATA=$(../.bin/jq '.')
 
 LEN=$(echo $DATA | ../.bin/jq '. | length') 
