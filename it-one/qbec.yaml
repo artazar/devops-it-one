@@ -17,9 +17,11 @@ spec:
           {
             local p = import './params.libsonnet',
             # TODO: how to iterate and call command for each object in array?
-            local values = p.envs[0].components['ingress'].values,
-            command: '../.bin/helm',
-            args: [ 'template', p.envs[0].name, '../vendor', '-f-' ],
+            local values = p.envs,
+            # command: '../.bin/helm',
+            # args: [ 'template', p.envs[0].name, '../vendor', '-f-' ],
+            # stdin: std.manifestJson(values)
+            command: './script.sh',
             stdin: std.manifestJson(values)
           }
   dataSources:

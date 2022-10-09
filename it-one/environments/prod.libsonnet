@@ -28,7 +28,10 @@ local prod1 = {
             'qbec.io/instance': 'prod1'
           },
           controller: {
-            kind: 'DaemonSet'
+            kind: 'DaemonSet',
+            ingressClassResource: {
+              name: 'nginx-prod1'
+            }
           }
         }
       }
@@ -44,7 +47,10 @@ local prod2 = {
             'qbec.io/instance': 'prod2'
           },
           controller: {
-            kind: 'DaemonSet'
+            kind: 'DaemonSet',
+            ingressClassResource: {
+              name: 'nginx-prod2'
+            }
           }
         }
       }
@@ -56,11 +62,14 @@ local prod3 = {
     components: {
       ingress: {
         values: {
-          commonLabels+: {
+          commonLabels: {
             'qbec.io/instance': 'prod3'
           },
           controller: {
-            hostNetwork: true
+            hostNetwork: true,
+            ingressClassResource: {
+              name: 'nginx-prod3'
+            }
           }
         }
       }
