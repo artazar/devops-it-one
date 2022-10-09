@@ -4,7 +4,11 @@
   components: {
     ingress +: {
       values: {
-        controller: {
+        commonLabels: {
+          'qbec.io/origin': 'it-one-hackathon',
+          'qbec.io/deployed-by': 'team-2',
+        },
+        controller +: {
           replicaCount: 1
         }
       }

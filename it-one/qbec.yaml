@@ -10,21 +10,16 @@ spec:
     prod:
       defaultNamespace: default
       context: prod
-    prod2:
-      defaultNamespace: default
-      context: prod
-    prod3:
-      defaultNamespace: default
-      context: prod
   vars:
     computed:
       - name: helmTemplate
         code: |
           {
             local p = import './params.libsonnet',
-            local values = p.components['ingress'].values,
-            command: 'helm',
-            args: [ 'template', ('ingress-' + std.extVar('qbec.io/env')), '../vendor', '-f-' ],
+            # TODO: how to iterate and call command for each object in array?
+            local values = p.envs[0].components['ingress'].values,
+            command: '../.bin/helm',
+            args: [ 'template', p.envs[0].name, '../vendor', '-f-' ],
             stdin: std.manifestJson(values)
           }
   dataSources:
